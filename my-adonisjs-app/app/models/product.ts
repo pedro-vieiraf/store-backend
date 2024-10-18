@@ -25,6 +25,9 @@ export default class Product extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
+  @column.dateTime({ serializeAs: null })
+  declare deletedAt: DateTime
+
   @hasMany(() => Sale)
   declare sales: HasMany<typeof Sale>
 }

@@ -1,12 +1,16 @@
 import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
+import { DateTime } from 'luxon'
 import { error } from 'node:console'
 
 export default class ProductsController {
   async index({ response }: HttpContext) {
     // return all products
     try {
-      const products = await Product.query().select('name', 'price').orderBy('name', 'asc')
+      const products = await Product.query()
+        .select('name', 'price')
+        .whereNull('deletedAt')
+        .orderBy('name', 'asc')
 
       return response.status(200).json(products)
     } catch (err) {
@@ -32,7 +36,7 @@ export default class ProductsController {
 
       await Product.create({ name, price, stock, description })
 
-      return response.status(201)
+      return response.status(201).json({ message: 'Product created' })
     } catch (err) {
       console.error(err)
       return response.status(500).json({ error: err.message })
@@ -92,5 +96,25 @@ export default class ProductsController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, response }: HttpContext) {
+    try {
+      const { id } = params
+
+      const product = await Product.find(id)
+      if (!product) {
+        return response.status(404).json({ error: 'Product not found' })
+      }
+
+      const newProduct = {
+        deletedAt: DateTime.local(),
+      }
+
+      await product.merge(newProduct).save()
+
+      return response.status(204).json({ message: 'Product deleted' })
+    } catch (err) {
+      console.error(err)
+      return response.status(500).json({ error: err.message })
+    }
+  }
 }
