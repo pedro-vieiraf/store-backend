@@ -7,22 +7,23 @@ export default class extends BaseSeeder {
       ['name', 'price', 'stock', 'description'],
       [
         {
-          name: 'Product 1',
-          price: 100,
+          name: 'Triforce',
+          price: 9999,
           stock: 10,
-          description: 'Description 1',
+          description: 'A sacred golden relic left behind by the Golden Goddesses',
         },
         {
-          name: 'Product 2',
-          price: 550,
-          stock: 23,
-          description: 'Description 2',
-        },
-        {
-          name: 'Product 3',
+          name: 'Master Sword',
           price: 1500,
+          stock: 23,
+          description: 'The Sword of the Hero of Time',
+        },
+        {
+          name: 'Ocarina of Time',
+          price: 550,
           stock: 30,
-          description: 'Description 3',
+          description:
+            'A sacred instrument has been secretly passed down for generations within the Royal Family of Hyrule',
         },
       ]
     )
