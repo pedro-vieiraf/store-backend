@@ -15,7 +15,7 @@ export default class CustomersController {
     }
   }
 
-  async create({ request, response }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     // create a new customer
     try {
       const { name, cpf } = request.body()

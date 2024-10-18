@@ -16,7 +16,7 @@ router.on('/').render('pages/home')
 // customers routes
 router.get('customers', [CustomersController, 'index'])
 router.get('customers/:id', [CustomersController, 'show'])
-router.post('customers', [CustomersController, 'create'])
+router.post('customers', [CustomersController, 'store'])
 router.put('customers/:id', [CustomersController, 'update'])
 router.delete('customers/:id', [CustomersController, 'destroy'])
 
