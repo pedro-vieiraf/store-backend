@@ -69,7 +69,25 @@ export default class ProductsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request, response }: HttpContext) {
+    try {
+      const { id } = params
+      const data = request.only(['name', 'price', 'stock', 'description'])
+
+      const product = await Product.find(id)
+      if (!product) {
+        return response.status(404).json({ error: 'Product not found' })
+      }
+
+      product.merge(data)
+      await product.save()
+
+      return response.status(200).json(product)
+    } catch (err) {
+      console.error(err)
+      return response.status(500).json({ error: err.message })
+    }
+  }
 
   /**
    * Delete record

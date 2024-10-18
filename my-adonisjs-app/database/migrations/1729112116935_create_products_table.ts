@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('name').notNullable()
       table.string('description')
-      table.integer('price').notNullable()
+      table.float('price').notNullable()
       table.integer('stock').notNullable()
 
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
