@@ -23,7 +23,21 @@ export default class ProductsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, response }: HttpContext) {
+    try {
+      const { name, price, stock, description } = request.body()
+      if (!name || !price || !stock || !description) {
+        return response.status(400).json({ error: 'All fields are required' })
+      }
+
+      await Product.create({ name, price, stock, description })
+
+      return response.status(201)
+    } catch (err) {
+      console.error(err)
+      return response.status(500).json({ error: err.message })
+    }
+  }
 
   /**
    * Show individual record

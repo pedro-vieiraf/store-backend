@@ -23,3 +23,4 @@ router.delete('customers/:id', [CustomersController, 'destroy'])
 // products routes
 router.get('products', [ProductsController, 'index'])
 router.get('products/:id', [ProductsController, 'show'])
+router.post('products', [ProductsController, 'store'])
