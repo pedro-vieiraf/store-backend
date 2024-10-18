@@ -19,7 +19,23 @@ export default class CustomersController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ request, response }: HttpContext) {
+    try {
+      const { name, cpf } = request.body()
+      if (!name || !cpf) {
+        return response.status(400).json({ error: 'Name and CPF are required' })
+      }
+
+      await Customer.create({ name, cpf })
+
+      return response.status(201)
+    } catch (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return response.status(400).json({ error: 'CPF already registered' })
+      }
+      return response.status(500).json({ error: err.message })
+    }
+  }
 
   /**
    * Handle form submission for the create action

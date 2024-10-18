@@ -14,3 +14,4 @@ router.on('/').render('pages/home')
 
 router.get('customers', [CustomersController, 'index'])
 router.get('customers/:id', [CustomersController, 'show'])
+router.post('customers', [CustomersController, 'create'])
