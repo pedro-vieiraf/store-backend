@@ -1,7 +1,6 @@
 import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
-import { error } from 'node:console'
 
 export default class ProductsController {
   async index({ response }: HttpContext) {
@@ -19,15 +18,8 @@ export default class ProductsController {
     }
   }
 
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
-
-  /**
-   * Handle form submission for the create action
-   */
   async store({ request, response }: HttpContext) {
+    // create new product
     try {
       const { name, price, stock, description } = request.body()
       if (!name || !price || !stock || !description) {
@@ -43,10 +35,8 @@ export default class ProductsController {
     }
   }
 
-  /**
-   * Show individual record
-   */
   async show({ params, response }: HttpContext) {
+    // return one product
     try {
       const { id } = params
       const product = await Product.query()
@@ -65,15 +55,8 @@ export default class ProductsController {
     }
   }
 
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
   async update({ params, request, response }: HttpContext) {
+    // update the product
     try {
       const { id } = params
       const data = request.only(['name', 'price', 'stock', 'description'])
@@ -93,9 +76,6 @@ export default class ProductsController {
     }
   }
 
-  /**
-   * Delete record
-   */
   async destroy({ params, response }: HttpContext) {
     try {
       const { id } = params
