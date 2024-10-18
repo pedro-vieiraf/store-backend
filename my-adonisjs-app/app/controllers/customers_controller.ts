@@ -7,6 +7,7 @@ export default class CustomersController {
     // return all customers
     try {
       const customers = await Customer.query().select('name', 'cpf').orderBy('id', 'asc')
+
       return response.status(200).json(customers)
     } catch (err) {
       console.error(err)
@@ -33,14 +34,6 @@ export default class CustomersController {
     }
   }
 
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {}
-
-  /**
-   * Show individual record
-   */
   async show({ params, request, response }: HttpContext) {
     // returns one customer and their sales
     try {
@@ -98,21 +91,14 @@ export default class CustomersController {
       return response.status(500).json({ error: err.message })
     }
   }
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
 
-  /**
-   * Handle form submission for the edit action
-   */
   async update({ params, response, request }: HttpContext) {
     // update a customer
     try {
       const { id } = params
       const { name, cpf } = request.body()
 
-      const customer = await Customer.find(id)
+      const customer = await Customer.find(id) // find the customer
 
       if (!customer) {
         return response.status(404).json({ error: 'Customer not found' })
@@ -122,7 +108,7 @@ export default class CustomersController {
         cpf: cpf,
       }
 
-      await customer.merge(newCustomer).save()
+      await customer.merge(newCustomer).save() // update the customer
 
       return response.status(200).json(newCustomer)
     } catch (err) {
@@ -130,8 +116,24 @@ export default class CustomersController {
       return response.status(500).json({ error: err.message })
     }
   }
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
+
+  async destroy({ params, response }: HttpContext) {
+    // delete a customer
+    try {
+      const { id } = params
+
+      const customer = await Customer.find(id) // find the customer
+
+      if (!customer) {
+        return response.status(404).json({ error: 'Customer not found' })
+      }
+
+      await customer.delete() // delete the customer
+
+      return response.status(204)
+    } catch (err) {
+      console.error(err)
+      return response.status(500).json({ error: err.message })
+    }
+  }
 }
