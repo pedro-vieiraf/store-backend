@@ -3,9 +3,6 @@ import Customer from '#models/customer'
 import Sale from '#models/sale'
 
 export default class CustomersController {
-  /**
-   * Display a list of resource
-   */
   async index({ response }: HttpContext) {
     // return all customers
     try {
@@ -16,10 +13,9 @@ export default class CustomersController {
       return response.status(500).json({ error: err.message })
     }
   }
-  /**
-   * Display form to create a new record
-   */
+
   async create({ request, response }: HttpContext) {
+    // create a new customer
     try {
       const { name, cpf } = request.body()
       if (!name || !cpf) {
@@ -46,6 +42,7 @@ export default class CustomersController {
    * Show individual record
    */
   async show({ params, request, response }: HttpContext) {
+    // returns one customer and their sales
     try {
       const { id } = params
       const month = request.input('month')
@@ -109,8 +106,30 @@ export default class CustomersController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, response, request }: HttpContext) {
+    // update a customer
+    try {
+      const { id } = params
+      const { name, cpf } = request.body()
 
+      const customer = await Customer.find(id)
+
+      if (!customer) {
+        return response.status(404).json({ error: 'Customer not found' })
+      }
+      const newCustomer = {
+        name: name,
+        cpf: cpf,
+      }
+
+      await customer.merge(newCustomer).save()
+
+      return response.status(200).json(newCustomer)
+    } catch (err) {
+      console.error(err)
+      return response.status(500).json({ error: err.message })
+    }
+  }
   /**
    * Delete record
    */
