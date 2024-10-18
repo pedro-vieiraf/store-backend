@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node bin/server.js",
     "build": "node ace build",
+    "db": "node ace migration:reset && node ace migration:run && node ace db:seed",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",

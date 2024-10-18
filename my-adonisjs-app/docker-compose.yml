@@ -12,14 +12,14 @@ services:
       - TZ=UTC
       - NODE_ENV=development
       - PORT=3333
-      - HOST=0.0.0.0
+      - HOST=127.0.0.1
       - LOG_LEVEL=info
       - APP_KEY=DGFvXF6d4SmvJHSMIx4WFCPZ6N8asozn
       - DB_HOST=db
       - DB_PORT=3306
       - DB_USER=user
       - DB_PASSWORD=userpassword
-      - DB_DATABASE=be_talent
+      - DB_DATABASE=store_db
     depends_on:
       - db
 
@@ -30,7 +30,7 @@ services:
       - 3306:3306
     restart: unless-stopped
     environment:
-      - MYSQL_DATABASE=be_talent
+      - MYSQL_DATABASE=store_db
       - MYSQL_USER=user
       - MYSQL_ROOT_PASSWORD=userpassword
       - MYSQL_PASSWORD=userpassword
