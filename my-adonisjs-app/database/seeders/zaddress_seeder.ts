@@ -4,9 +4,10 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 export default class extends BaseSeeder {
   async run() {
     await Address.updateOrCreateMany(
-      ['country', 'state', 'city', 'street', 'number'],
+      ['customerId', 'country', 'state', 'city', 'street', 'number'],
       [
         {
+          customerId: 3,
           country: 'Brasil',
           state: 'São Paulo',
           city: 'São Paulo',
@@ -14,6 +15,7 @@ export default class extends BaseSeeder {
           number: 123,
         },
         {
+          customerId: 2,
           country: 'Brasil',
           state: 'Rio de Janeiro',
           city: 'Rio de Janeiro',
@@ -21,6 +23,7 @@ export default class extends BaseSeeder {
           number: 456,
         },
         {
+          customerId: 1,
           country: 'Brasil',
           state: 'Minas Gerais',
           city: 'Belo Horizonte',
@@ -28,6 +31,7 @@ export default class extends BaseSeeder {
           number: 789,
         },
         {
+          customerId: 4,
           country: 'Brasil',
           state: 'Paraná',
           city: 'Curitiba',

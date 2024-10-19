@@ -1,25 +1,27 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'addresses'
+  protected tableName = 'auth_access_tokens'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').notNullable().primary()
+      table.increments('id')
       table
-        .integer('customer_id')
+        .integer('tokenable_id')
+        .notNullable()
         .unsigned()
         .references('id')
-        .inTable('customers')
+        .inTable('users')
         .onDelete('CASCADE')
-      table.string('country', 100).notNullable()
-      table.string('state', 100).notNullable()
-      table.string('city', 100).notNullable()
-      table.string('street', 100).notNullable()
-      table.integer('number').notNullable()
 
+      table.string('type').notNullable()
+      table.string('name').nullable()
+      table.string('hash').notNullable()
+      table.text('abilities').notNullable()
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
+      table.timestamp('last_used_at').nullable()
+      table.timestamp('expires_at').nullable()
     })
   }
 

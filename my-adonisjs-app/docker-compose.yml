@@ -20,6 +20,7 @@ services:
       - DB_USER=user
       - DB_PASSWORD=userpassword
       - DB_DATABASE=store_db
+      - JWT_SECRET= secretJWT
     depends_on:
       - db
 
