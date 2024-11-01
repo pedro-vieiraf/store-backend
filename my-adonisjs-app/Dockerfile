@@ -10,6 +10,4 @@ COPY . .
 
 EXPOSE 3333
 
-RUN npm install python
-
 CMD ["node", "ace", "serve", "--hmr"]
