@@ -11,11 +11,14 @@ export type ProviderValues = {
     loading: boolean;
     setLoading: (loading: boolean) => void;
     onLogin: (email: string) => void;
+    products: never[];
+    setProducts: React.Dispatch<React.SetStateAction<never[]>>
 }
 
 function Provider({ children } : ProviderProps) {
 
     const [user, setUser] = useState("");
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const onLogin = (email: string) => {
@@ -25,6 +28,8 @@ function Provider({ children } : ProviderProps) {
     const values = {
         user,
         setUser,
+        products,
+        setProducts,
         loading,
         setLoading,
         onLogin

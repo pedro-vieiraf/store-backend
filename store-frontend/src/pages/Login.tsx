@@ -8,7 +8,7 @@ function Login() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [, setPassword] = useState('');
 
     const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) : void => {
         if(target.name === 'email') {
@@ -33,7 +33,7 @@ function Login() {
                 <input type="email" onChange={ handleChange } name="email" id="email" placeholder="Enter your email address"/>
                 <input type="password" onChange={ handleChange } name="password" id="password" placeholder="Enter your password"/>
                 <p>New here?</p>
-                <button>Login</button>
+                <button>Sign In</button>
             </form>
         </>
     )
