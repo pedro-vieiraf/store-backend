@@ -1,0 +1,21 @@
+services:
+  frontend:
+    build: .
+    container_name: frontend
+    tty: true
+    stdin_open: true
+    ports:
+      - 5173:5173
+    volumes:
+      - ./:/app
+    environment:
+      - TZ=UTC
+      - NODE_ENV=development
+      - PORT=5173
+      - HOST=0.0.0.0
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
