@@ -1,15 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useContext, useState } from "react"
+import Context from "../context/Context";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
+    const { onLogin } = useContext(Context);
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) : void => {
-        console.log(target);
-        console.log(target.value);
-        
-        
         if(target.name === 'email') {
             setEmail(target.value)
         } else{
@@ -19,7 +20,8 @@ function Login() {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        console.log(email, password);
+        onLogin(email);
+        navigate('/products');
         
     }
 
