@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import Context from "../context/Context";
 import { Product } from "../types";
+import axios from 'axios';
 
 
 function ProductsPage() {
@@ -10,10 +11,18 @@ function ProductsPage() {
     useEffect(() => {
         async function getProducts() {
             try {
-                const address = 'http://backend'
-                const response = await fetch(`${address}/products`)
-                const data = await response.json();
-                setProducts(data);
+                const address = 'http://172.18.0.2:3333';
+                const token = 'oat_MQ.NEs2cEFuVnMwdGQ3aG9iVTlCeXVkenFOZDMtbXhwMUFyUWZFNG1ObTI3MDIzMTk4NDQ'; // Substitua pelo seu token real
+        
+                const response = await axios.get(`${address}/products`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+        
+                const data = response.data;
+                setProducts(data)
             } catch (err) {
                 console.log('Error fetching data:', err);
                 console.error(err)
@@ -25,7 +34,7 @@ function ProductsPage() {
     return (
         <>
             <h1>Products Page</h1>
-            <h2>Não tem backend ainda</h2>
+            <h2>Não tem backend</h2>
             <div>
                 {products.map((product: Product) => (
                     <div key={product.id}>
