@@ -2,13 +2,15 @@ import { useContext, useEffect } from "react";
 import Context from "../context/Context";
 import { Product } from "../types";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function ProductsPage() {
 
-    const { products, setProducts, token } = useContext(Context);
+    const { products, setProducts, token, loading, setLoading } = useContext(Context);
 
     useEffect(() => {
         async function getProducts() {
+            setLoading(true);
             try {
                 const address = import.meta.env.VITE_BACKEND_URL;
                 console.log('rodando em', address);
@@ -21,15 +23,20 @@ function ProductsPage() {
                 });
         
                 const data = response.data;
-                setProducts(data)
+                setProducts(data);
+                setLoading(false);
             } catch (err) {
                 console.log('Error fetching data:', err);
                 console.error(err)
             }
         }
         getProducts()
-    }, [setProducts, token])
+    }, [setProducts, setLoading, token])
     
+    if(loading) {
+        return <h1>Loading...</h1>
+    }
+
     return (
         <>
             <h1>Products Page</h1>
@@ -40,6 +47,7 @@ function ProductsPage() {
                         <p>{product.description}</p>
                         <p>Price: ${product.price}</p>
                         <p>Stock: {product.stock}</p>
+                        <Link to={`/products/${product.id}`}>View Details</Link>
                     </div>
                 ))}
             </div>
