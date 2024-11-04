@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import Context from "../context/Context";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
 
@@ -8,20 +9,32 @@ function Login() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [, setPassword] = useState('');
+
+    let password = '';
 
     const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) : void => {
         if(target.name === 'email') {
             setEmail(target.value)
         } else{
-            setPassword(target.value)
+            password = target.value;
         }
     }
 
-    const handleSubmit = (event: FormEvent) => {
+    const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        onLogin(email);
-        navigate('/products');
+        const address = import.meta.env.VITE_BACKEND_URL;
+
+        try {
+            const response = await axios.post(`${address}/login`, {
+                email,
+                password
+            });
+            const token = response.data.token;
+            onLogin(email, token);
+            navigate('/products');
+        } catch (err) {
+            console.error('Error logging in:', err)
+        }
         
     }
 
