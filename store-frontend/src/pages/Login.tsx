@@ -1,14 +1,14 @@
-import { ChangeEvent, FormEvent, useContext, useState } from "react"
+import { ChangeEvent, FormEvent, useContext } from "react"
 import Context from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Login() {
 
-    const { onLogin } = useContext(Context);
+    const { onLogin, email, setEmail } = useContext(Context);
 
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
 
     let password = '';
 
@@ -37,7 +37,7 @@ function Login() {
         }
         
     }
-
+    // colocar uma mensagem de login inválido caso esteja errado
 
     return (
         <>
@@ -45,8 +45,8 @@ function Login() {
             <form onSubmit={ handleSubmit }>
                 <input type="email" onChange={ handleChange } name="email" id="email" placeholder="Enter your email address"/>
                 <input type="password" onChange={ handleChange } name="password" id="password" placeholder="Enter your password"/>
-                <p>New here?</p>
                 <button>Sign In</button>
+                <p>New here? <Link to="/register">Sign up</Link></p>
             </form>
         </>
     )

@@ -10,6 +10,8 @@ export type ProviderValues = {
     setUser: (email: string) => void;
     setToken: React.Dispatch<React.SetStateAction<string>>
     token: string;
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
     loading: boolean;
     setLoading: (loading: boolean) => void;
     onLogin: (email: string, token: string) => void;
@@ -23,6 +25,7 @@ function Provider({ children } : ProviderProps) {
     const [token, setToken] = useState("");
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState('');
 
     const onLogin = (email: string, token: string) => {
         setUser(email);
@@ -34,6 +37,8 @@ function Provider({ children } : ProviderProps) {
         setUser,
         token,
         setToken,
+        email,
+        setEmail,
         products,
         setProducts,
         loading,
