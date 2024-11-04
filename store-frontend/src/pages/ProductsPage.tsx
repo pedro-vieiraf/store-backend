@@ -3,7 +3,6 @@ import Context from "../context/Context";
 import { Product } from "../types";
 import axios from 'axios';
 
-
 function ProductsPage() {
 
     const { products, setProducts } = useContext(Context);
@@ -11,9 +10,10 @@ function ProductsPage() {
     useEffect(() => {
         async function getProducts() {
             try {
-                const address = 'http://172.18.0.2:3333';
-                const token = 'oat_MQ.NEs2cEFuVnMwdGQ3aG9iVTlCeXVkenFOZDMtbXhwMUFyUWZFNG1ObTI3MDIzMTk4NDQ'; // Substitua pelo seu token real
-        
+                const address = import.meta.env.VITE_BACKEND_URL;
+                const token = 'oat_MQ.d2c5by1HRURHYUNfSnprOUJhbm5kNXRsd0JmcFJXa1JFcVlBS3g0SjM2MzY1OTMyMTk'; // Substitua pelo seu token real
+                console.log('rodando em', address);
+                
                 const response = await axios.get(`${address}/products`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -34,9 +34,8 @@ function ProductsPage() {
     return (
         <>
             <h1>Products Page</h1>
-            <h2>Não tem backend</h2>
             <div>
-                {products.map((product: Product) => (
+                {products.map((product: Product) => (                  
                     <div key={product.id}>
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>

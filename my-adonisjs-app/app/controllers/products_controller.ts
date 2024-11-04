@@ -7,7 +7,7 @@ export default class ProductsController {
     // return all products
     try {
       const products = await Product.query()
-        .select('name', 'price')
+        .select('id', 'name', 'price', 'stock')
         .whereNull('deletedAt')
         .orderBy('name', 'asc')
 
