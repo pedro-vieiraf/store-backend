@@ -8,7 +8,8 @@ function ProductsPage() {
 
     const { products, setProducts, token, loading, setLoading, cart, setCart } = useContext(Context);
 
-    const handleCart = async (productId: number) => { // Remover um produto do estoque
+    // Remover um produto do estoque
+    const handleCart = async (productId: number) => { 
         try{
             const address = import.meta.env.VITE_BACKEND_URL;
             const response = await axios.get(`${address}/products/${productId}`, {
@@ -19,7 +20,6 @@ function ProductsPage() {
             });
             const product = response.data;
             setCart([...cart, product]);
-            console.log('Cart:', cart);
         } catch(err) {
             console.log('Error fetching data:', err);
             console.error(err)
@@ -31,7 +31,6 @@ function ProductsPage() {
             setLoading(true);
             try {
                 const address = import.meta.env.VITE_BACKEND_URL;
-                console.log('rodando em', address);
                 
                 const response = await axios.get(`${address}/products`, {
                     headers: {

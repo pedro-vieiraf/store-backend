@@ -13,7 +13,7 @@ function ProductDetails() {
         if(product) {
             const newCart = [...cart, product];
             setCart(newCart);
-            console.log('Cart:', cart);
+
         }
     }
 
