@@ -41,7 +41,7 @@ export default class ProductsController {
       const { id } = params
       const product = await Product.query()
         .where('id', id)
-        .select('name', 'price', 'stock', 'description')
+        .select('id', 'name', 'price', 'stock', 'description')
         .first()
 
       if (!product) {

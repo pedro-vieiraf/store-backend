@@ -6,7 +6,25 @@ import { Link } from "react-router-dom";
 
 function ProductsPage() {
 
-    const { products, setProducts, token, loading, setLoading } = useContext(Context);
+    const { products, setProducts, token, loading, setLoading, cart, setCart } = useContext(Context);
+
+    const handleCart = async (productId: number) => { // Remover um produto do estoque
+        try{
+            const address = import.meta.env.VITE_BACKEND_URL;
+            const response = await axios.get(`${address}/products/${productId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+            });
+            const product = response.data;
+            setCart([...cart, product]);
+            console.log('Cart:', cart);
+        } catch(err) {
+            console.log('Error fetching data:', err);
+            console.error(err)
+        }
+    }
 
     useEffect(() => {
         async function getProducts() {
@@ -48,6 +66,8 @@ function ProductsPage() {
                         <p>Price: ${product.price}</p>
                         <p>Stock: {product.stock}</p>
                         <Link to={`/products/${product.id}`}>View Details</Link>
+                        <button onClick={ () => handleCart(product.id) }>Add to cart</button>
+
                     </div>
                 ))}
             </div>

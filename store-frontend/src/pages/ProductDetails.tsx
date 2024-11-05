@@ -7,7 +7,15 @@ import Context from "../context/Context";
 function ProductDetails() {
     const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product | null>(null);
-    const { token, setLoading, loading } = useContext(Context);
+    const { token, setLoading, loading, setCart, cart } = useContext(Context);
+
+    const handleCart = () => { // Remover um produto do estoque
+        if(product) {
+            const newCart = [...cart, product];
+            setCart(newCart);
+            console.log('Cart:', cart);
+        }
+    }
 
     useEffect(() => {
         async function getProduct() {
@@ -47,7 +55,7 @@ function ProductDetails() {
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
             <p>Stock: {product.stock}</p>
-
+            <button onClick={ handleCart }>Add to cart</button>
         </div>
         </>
     );

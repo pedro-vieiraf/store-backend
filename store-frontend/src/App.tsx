@@ -5,6 +5,7 @@ import ProductsPage from './pages/ProductsPage'
 import Register from './pages/Register'
 import ProductDetails from './pages/ProductDetails'
 import Header from './components/Header'
+import ShoppingCart from './pages/ShoppingCart'
 
 function App() { // initial commit
 
@@ -16,6 +17,7 @@ function App() { // initial commit
       <Routes>
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
         <Route path="*" element={<h1>Not Found</h1>} />
