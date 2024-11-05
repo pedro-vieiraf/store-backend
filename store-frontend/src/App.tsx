@@ -7,9 +7,9 @@ import ProductDetails from './pages/ProductDetails'
 import Header from './components/Header'
 import ShoppingCart from './pages/ShoppingCart'
 
-function App() { // initial commit
+function App() {
 
-  const location = useLocation(); // Utilize useLocation para obter a rota atual // Verifique se a rota atual é /login ou /register 
+  const location = useLocation();
   const showHeader = location.pathname !== '/' && location.pathname !== '/register'
   return (
     <>
