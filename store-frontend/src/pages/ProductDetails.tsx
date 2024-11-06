@@ -31,10 +31,11 @@ function ProductDetails() {
                 });
                 const data = response.data;
                 setProduct(data);
-                setLoading(false);
             } catch(err) {
                 console.log('Error fetching data:', err);
                 console.error(err)
+            } finally {
+                setLoading(false);
             }
         }
         getProduct();

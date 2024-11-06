@@ -41,10 +41,11 @@ function ProductsPage() {
         
                 const data = response.data;
                 setProducts(data);
-                setLoading(false);
             } catch (err) {
                 console.log('Error fetching data:', err);
                 console.error(err)
+            } finally {
+                setLoading(false);
             }
         }
         getProducts()
