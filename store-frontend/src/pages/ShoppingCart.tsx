@@ -4,7 +4,7 @@ import { CartProduct, Product } from "../types";
 import axios from "axios";
 
 function ShoppingCart() {
-    const { cart, id, token } = useContext(Context);
+    const { cart, setCart, id, token } = useContext(Context);
 
     function groupCartItems(cart: Product[]): (Product & { quantity: number })[] {
         const groupedItems: { [key: number]: Product & { quantity: number } } = {};
@@ -45,6 +45,8 @@ function ShoppingCart() {
                     }),                   
                 )
             );
+            setCart([])
+
         } catch (err) {
             console.error('Error checking out:', err)
         }
