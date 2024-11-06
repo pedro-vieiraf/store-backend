@@ -18,12 +18,12 @@ export default class CustomersController {
   async store({ request, response }: HttpContext) {
     // create a new customer
     try {
-      const { name, cpf } = request.body()
-      if (!name || !cpf) {
-        return response.status(400).json({ error: 'Name and CPF are required' })
+      const { name, userId, cpf } = request.body()
+      if (!name || !cpf || !userId) {
+        return response.status(400).json({ error: 'All the fields are required' })
       }
 
-      await Customer.create({ name, cpf })
+      await Customer.create({ name, userId, cpf })
 
       return response.status(201)
     } catch (err) {

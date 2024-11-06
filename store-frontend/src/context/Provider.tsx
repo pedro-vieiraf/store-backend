@@ -20,6 +20,10 @@ export type ProviderValues = {
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
     cart: Product[];
     setCart: React.Dispatch<React.SetStateAction<Product[]>>
+    cpf: string;
+    setCPF: React.Dispatch<React.SetStateAction<string>>
+    name: string;
+    setName: React.Dispatch<React.SetStateAction<string>>
 }
 
 function Provider({ children } : ProviderProps) {
@@ -30,6 +34,8 @@ function Provider({ children } : ProviderProps) {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [cart, setCart] = useState<Product[]>([]);
+    const [cpf, setCPF] = useState('');
+    const [name, setName] = useState('');
 
     const onLogin = (email: string, token: string) => {
         setUser(email);
@@ -49,7 +55,11 @@ function Provider({ children } : ProviderProps) {
         setCart,
         loading,
         setLoading,
-        onLogin
+        onLogin,
+        cpf,
+        setCPF,
+        name,
+        setName
     }
 
     return(
