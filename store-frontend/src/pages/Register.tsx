@@ -39,7 +39,7 @@ function Register() {
             const id = response.data.user.id;
             console.log('passou do register');
             
-            onLogin(email, token);
+            onLogin(email, token, id);
 
             const customerResponse = await axios.post(`${address}/customers`, {
                 name,

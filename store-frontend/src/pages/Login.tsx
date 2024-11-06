@@ -29,8 +29,11 @@ function Login() {
                 email,
                 password
             });
-            const token = response.data.token;
-            onLogin(email, token);
+            console.log("passou pra cá");
+            
+            const token = response.data.token.token;
+            const id = response.data.user.id;
+            onLogin(email, token, id);
             navigate('/products');
         } catch (err) {
             console.error('Error logging in:', err)

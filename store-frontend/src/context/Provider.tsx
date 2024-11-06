@@ -15,7 +15,7 @@ export type ProviderValues = {
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     loading: boolean;
     setLoading: (loading: boolean) => void;
-    onLogin: (email: string, token: string) => void;
+    onLogin: (email: string, token: string, id: number) => void;
     products: Product[];
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
     cart: Product[];
@@ -24,11 +24,14 @@ export type ProviderValues = {
     setCPF: React.Dispatch<React.SetStateAction<string>>
     name: string;
     setName: React.Dispatch<React.SetStateAction<string>>
+    id: number;
+    setId: React.Dispatch<React.SetStateAction<number>>
 }
 
 function Provider({ children } : ProviderProps) {
 
     const [user, setUser] = useState("");
+    const [id, setId] = useState(0);
     const [token, setToken] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
@@ -37,8 +40,9 @@ function Provider({ children } : ProviderProps) {
     const [cpf, setCPF] = useState('');
     const [name, setName] = useState('');
 
-    const onLogin = (email: string, token: string) => {
+    const onLogin = (email: string, token: string, id: number) => {
         setUser(email);
+        setId(id);
         setToken(token);
     } 
 
@@ -59,7 +63,9 @@ function Provider({ children } : ProviderProps) {
         cpf,
         setCPF,
         name,
-        setName
+        setName,
+        id,
+        setId
     }
 
     return(
