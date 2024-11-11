@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
         {
           name: 'Triforce',
           price: 9999,
-          stock: 10,
+          stock: 1,
           description: 'A sacred golden relic left behind by the Golden Goddesses',
         },
         {
