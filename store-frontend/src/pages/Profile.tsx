@@ -21,7 +21,27 @@ function Profile() {
                 finalPrice: number;
             };
         }>;
+        products: Array<{
+            id: number,
+          name: string,
+          description: string,
+          price: number,
+        }>;
     }>(null);
+
+    const handleDeleteProduct = async (id: number) => {
+        try {
+            const address = import.meta.env.VITE_BACKEND_URL;
+            await axios.delete(`${address}/products/${id}`, {
+                headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                }
+            })
+        } catch (err) {
+            console.error('Error deleting product:', err)
+        }
+    };
 
     useEffect(() => {
         async function getProfile() {
@@ -75,7 +95,20 @@ function Profile() {
                         </div>
                     ))
                 ) : (
-                    <p>No sales found for this customer.</p>
+                    <p>You haven't made any purchases yet.</p>
+                )}
+                <h2>Products</h2>
+                {profile.products.length > 0 ? (
+                    profile.products.map((product) => (
+                        <div key={product.id} style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
+                            <h3>{product.name}</h3>
+                            <p><strong>Description:</strong> {product.description}</p>
+                            <p><strong>Price:</strong> ${product.price}</p>
+                            <button onClick={ () => handleDeleteProduct(product.id) }>Delete</button>
+                        </div>
+                    ))
+                ) : (
+                    <p>You haven't published any product yet.</p>
                 )}
             </section>
         </div>

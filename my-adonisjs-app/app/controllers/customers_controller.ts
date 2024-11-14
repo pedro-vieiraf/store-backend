@@ -54,7 +54,10 @@ export default class CustomersController {
         .orderBy('created_at', 'desc')
 
       // get all products for this customer
-      const productsQuery = Product.query().where('customer_id', id).orderBy('created_at', 'desc')
+      const productsQuery = Product.query()
+        .where('customer_id', id)
+        .whereNull('deletedAt')
+        .orderBy('created_at', 'desc')
 
       // filtering by month and/or year
       if (month && year) {
