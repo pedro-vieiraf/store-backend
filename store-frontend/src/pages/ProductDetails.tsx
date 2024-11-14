@@ -9,13 +9,17 @@ function ProductDetails() {
     const [product, setProduct] = useState<Product | null>(null);
     const { token, setLoading, loading, setCart, cart } = useContext(Context);
 
-    const handleCart = () => { // Remover um produto do estoque
-        if(product) {
-            const newCart = [...cart, product];
-            setCart(newCart);
-
+    const handleCart = () => { 
+        if (!product || product.stock <= 0) {
+            console.log("Product not found or out of stock");
+            return;
         }
-    }
+
+        const newCart = [...cart, product];
+        setCart(newCart);
+
+        setProduct({ ...product, stock: product.stock - 1 });
+    };
 
     useEffect(() => {
         async function getProduct() {
@@ -30,7 +34,11 @@ function ProductDetails() {
                     }
                 });
                 const data = response.data;
-                setProduct(data);
+
+                const quantityInCart = cart.filter(item => item.id === data.id).length;
+                const adjustedProduct = { ...data, stock: data.stock - quantityInCart };
+
+                setProduct(adjustedProduct);
             } catch(err) {
                 console.log('Error fetching data:', err);
                 console.error(err)
@@ -39,7 +47,7 @@ function ProductDetails() {
             }
         }
         getProduct();
-    }, [id, token, setLoading]);
+    }, [id, token, cart, setLoading]);
 
     if(!product) {
         return <h1>Product not found</h1>
