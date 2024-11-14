@@ -6,6 +6,7 @@ import Sale from './sale.js'
 import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
+import Product from './product.js'
 
 export default class Customer extends BaseModel {
   @column({ isPrimary: true })
@@ -37,4 +38,7 @@ export default class Customer extends BaseModel {
 
   @hasOne(() => Address)
   declare address: HasOne<typeof Address>
+
+  @hasMany(() => Product)
+  declare products: HasMany<typeof Product>
 }

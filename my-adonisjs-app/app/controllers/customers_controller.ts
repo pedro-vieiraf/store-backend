@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Customer from '#models/customer'
 import Sale from '#models/sale'
+import Product from '#models/product'
 
 export default class CustomersController {
   async index({ response }: HttpContext) {
@@ -52,6 +53,9 @@ export default class CustomersController {
         .preload('product')
         .orderBy('created_at', 'desc')
 
+      // get all products for this customer
+      const productsQuery = Product.query().where('customer_id', id).orderBy('created_at', 'desc')
+
       // filtering by month and/or year
       if (month && year) {
         salesQuery.whereRaw('MONTH(created_at) = ? AND YEAR(created_at) = ?', [month, year])
@@ -63,6 +67,9 @@ export default class CustomersController {
 
       // get the sales
       const sales = await salesQuery
+
+      // get the products
+      const products = await productsQuery
 
       // format the sales data
       const filteredSales = sales.map((sale) => {
@@ -85,6 +92,7 @@ export default class CustomersController {
           cpf: customer.cpf,
         },
         sales: filteredSales,
+        products: products,
       })
     } catch (err) {
       console.error(err)

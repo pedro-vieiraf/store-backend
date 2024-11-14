@@ -21,12 +21,12 @@ export default class ProductsController {
   async store({ request, response }: HttpContext) {
     // create new product
     try {
-      const { name, price, stock, description } = request.body()
-      if (!name || !price || !stock || !description) {
+      const { customerId, name, price, stock, description } = request.body()
+      if (!customerId || !name || !price || !stock || !description) {
         return response.status(400).json({ error: 'All fields are required' })
       }
 
-      await Product.create({ name, price, stock, description })
+      await Product.create({ customerId, name, price, stock, description })
 
       return response.status(201).json({ message: 'Product created' })
     } catch (err) {
