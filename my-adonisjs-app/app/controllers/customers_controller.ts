@@ -68,9 +68,6 @@ export default class CustomersController {
       // get the sales
       const sales = await salesQuery
 
-      // get the products
-      const products = await productsQuery
-
       // format the sales data
       const filteredSales = sales.map((sale) => {
         return {
@@ -85,6 +82,19 @@ export default class CustomersController {
         }
       })
 
+      // get the products
+      const products = await productsQuery
+
+      // format the products data
+      const filteredProducts = products.map((product) => {
+        return {
+          id: product.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+        }
+      })
+
       return response.status(200).json({
         customer: {
           id: customer.id,
@@ -92,7 +102,7 @@ export default class CustomersController {
           cpf: customer.cpf,
         },
         sales: filteredSales,
-        products: products,
+        products: filteredProducts,
       })
     } catch (err) {
       console.error(err)
