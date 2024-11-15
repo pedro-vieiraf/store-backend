@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Context from "../context/Context";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
 
@@ -28,6 +29,8 @@ function Profile() {
           price: number,
         }>;
     }>(null);
+
+    const navigate = useNavigate();
 
     const handleDeleteProduct = async (id: number) => {
         try {
@@ -98,17 +101,22 @@ function Profile() {
                     <p>You haven't made any purchases yet.</p>
                 )}
                 <h2>Products</h2>
+                <button onClick={() => navigate('/newProduct')}>Create a new product</button>
                 {profile.products.length > 0 ? (
                     profile.products.map((product) => (
                         <div key={product.id} style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
                             <h3>{product.name}</h3>
                             <p><strong>Description:</strong> {product.description}</p>
                             <p><strong>Price:</strong> ${product.price}</p>
+                            <button onClick={() => navigate(`/editProduct/${product.id}`)}>Edit</button>
                             <button onClick={ () => handleDeleteProduct(product.id) }>Delete</button>
                         </div>
                     ))
                 ) : (
-                    <p>You haven't published any product yet.</p>
+                    <>
+                        <p>You haven't published any product yet.</p>        
+                        <button onClick={() => navigate('/newProduct')}>Create a new product</button>
+                    </>
                 )}
             </section>
         </div>

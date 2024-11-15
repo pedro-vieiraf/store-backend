@@ -44,7 +44,7 @@ function Provider({ children } : ProviderProps) {
         setUser(email);
         setId(id);
         setToken(token);
-    } 
+    }
 
     const values = {
         user,
