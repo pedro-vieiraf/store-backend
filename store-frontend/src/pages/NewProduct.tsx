@@ -1,62 +1,58 @@
-import { ChangeEvent, FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Context from "../context/Context";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function NewProduct() {
 
-    const { token, id } = useContext(Context);
-    
-    let name = '';
-    let description = '';
-    let price = 0;
-    let stock = 0;
+    const { token, id, isSubmitting, setIsSubmitting } = useContext(Context);
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: "",
+        description: "",
+        price: 0,
+        stock: 0
+    });
 
-    const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) => {
-        if(target.name === 'name') {
-            console.log(target.value);
-            
-            name = target.value;
-        }
-        if(target.name === 'description') {
-            console.log(target.value);
-
-            description = target.value;
-        }
-        if(target.name === 'price') {
-            console.log(target.value);
-
-            price = Number(target.value);
-            console.log(price);
-            
-        }
-        if(target.name === 'stock') {
-            console.log(target.value);
-
-            stock = Number(target.value);
-        }
-    }
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
+        setIsSubmitting(true);
+
+        if (!formData.name || !formData.description || formData.price <= 0 || formData.stock < 0) {
+            alert("Please fill in all fields correctly.");
+            return;
+        }
+        
         const address = import.meta.env.VITE_BACKEND_URL;
 
         try {
-            const response = await axios.post(`${address}/products`, {
+            await axios.post(`${address}/products`, {
                 customerId: id,
-                name,
-                price,
-                stock,
-                description
+                name: formData.name,
+                description: formData.description,
+                price: formData.price,
+                stock: formData.stock
             }, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             })
-            console.log(response.data);
+            navigate("/profile");
+
             
         } catch (err) {
             console.error('Error adding product:', err)
+        } finally {
+            setIsSubmitting(false);
         }
     }
     // adicionar imagem no banco de dados.
@@ -64,12 +60,27 @@ function NewProduct() {
         <div>
             <h1>Product information:</h1>
             <form onSubmit={ handleSubmit }>
-                <input type="file" onChange={ handleChange } name="image" id="image" accept="image/png, image/jpeg" /> 
-                <input type="text" onChange={ handleChange } name="name" id="name" placeholder="Product name"/>
-                <input type="text" onChange={ handleChange } name="description" id="description" placeholder="Product description"/>
-                <input type="number" onChange={ handleChange } name="price" min="0" step="0.1" id="price" placeholder="Product price"/>
-                <input type="number" onChange={ handleChange } name="stock" min="0" id="stock" placeholder="Current stock"/>
-                <button>Add product</button>
+                <div>
+                    <label htmlFor="image">Product image:</label>
+                    <input type="file" onChange={ handleChange } name="image" id="image" accept="image/png, image/jpeg" /> 
+                </div>
+                <div>
+                    <label htmlFor="name">Product name:</label>
+                    <input type="text" onChange={ handleChange } name="name" id="name" placeholder="Product name"/>
+                </div>
+                <div>
+                    <label htmlFor="description">Product description:</label>
+                    <input type="text" onChange={ handleChange } name="description" id="description" placeholder="Product description"/>
+                </div>
+                <div>
+                    <label htmlFor="price">Product price:</label>
+                    <input type="number" onChange={ handleChange } name="price" min="0" step="0.01" id="price" placeholder="Product price"/>
+                </div>
+                <div>
+                    <label htmlFor="stock">Current stock:</label>
+                    <input type="number" onChange={ handleChange } name="stock" min="0" id="stock" placeholder="Current stock"/>
+                </div>
+                <button disabled={isSubmitting}>{isSubmitting ? "Adding product..." : "Add product"}</button>
             </form>
         </div>
     );

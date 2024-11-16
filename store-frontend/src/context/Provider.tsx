@@ -13,8 +13,10 @@ export type ProviderValues = {
     token: string;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
+    isSubmitting: boolean;
+    setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>
     loading: boolean;
-    setLoading: (loading: boolean) => void;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
     onLogin: (email: string, token: string, id: number) => void;
     products: Product[];
     setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
@@ -34,6 +36,7 @@ function Provider({ children } : ProviderProps) {
     const [id, setId] = useState(0);
     const [token, setToken] = useState("");
     const [products, setProducts] = useState<Product[]>([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [cart, setCart] = useState<Product[]>([]);
@@ -57,6 +60,8 @@ function Provider({ children } : ProviderProps) {
         setProducts,
         cart,
         setCart,
+        isSubmitting,
+        setIsSubmitting,
         loading,
         setLoading,
         onLogin,
