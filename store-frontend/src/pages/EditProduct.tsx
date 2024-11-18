@@ -11,8 +11,8 @@ function EditProduct() {
     const [formData, setFormData] = useState({
         name: "",
         description: "",
-        price: "",
-        stock: ""
+        price: 0,
+        stock: 0
     });
     const navigate = useNavigate();
 
@@ -64,8 +64,8 @@ function EditProduct() {
             await axios.put(`${address}/products/${id}`, {
                 name: formData.name,
                 description: formData.description,
-                price: parseFloat(formData.price),
-                stock: parseInt(formData.stock)
+                price: formData.price,
+                stock: formData.stock
             }, {
                 headers: {
                     'Authorization': `Bearer ${token}`,

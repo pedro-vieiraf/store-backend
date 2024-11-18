@@ -46,13 +46,12 @@ function NewProduct() {
                     'Content-Type': 'application/json'
                 }
             })
+            setIsSubmitting(false);
             navigate("/profile");
 
             
         } catch (err) {
             console.error('Error adding product:', err)
-        } finally {
-            setIsSubmitting(false);
         }
     }
     // adicionar imagem no banco de dados.
@@ -61,23 +60,23 @@ function NewProduct() {
             <h1>Product information:</h1>
             <form onSubmit={ handleSubmit }>
                 <div>
-                    <label htmlFor="image">Product image:</label>
+                    <label htmlFor="image">Image:</label>
                     <input type="file" onChange={ handleChange } name="image" id="image" accept="image/png, image/jpeg" /> 
                 </div>
                 <div>
-                    <label htmlFor="name">Product name:</label>
+                    <label htmlFor="name">Name:</label>
                     <input type="text" onChange={ handleChange } name="name" id="name" placeholder="Product name"/>
                 </div>
                 <div>
-                    <label htmlFor="description">Product description:</label>
+                    <label htmlFor="description">Description:</label>
                     <input type="text" onChange={ handleChange } name="description" id="description" placeholder="Product description"/>
                 </div>
                 <div>
-                    <label htmlFor="price">Product price:</label>
+                    <label htmlFor="price">Price: R$</label>
                     <input type="number" onChange={ handleChange } name="price" min="0" step="0.01" id="price" placeholder="Product price"/>
                 </div>
                 <div>
-                    <label htmlFor="stock">Current stock:</label>
+                    <label htmlFor="stock">Stock:</label>
                     <input type="number" onChange={ handleChange } name="stock" min="0" id="stock" placeholder="Current stock"/>
                 </div>
                 <button disabled={isSubmitting}>{isSubmitting ? "Adding product..." : "Add product"}</button>

@@ -59,7 +59,7 @@ function ProductDetails() {
 
     return (
         <>
-        <div>
+        <div style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
             <h1>{product.name}</h1>
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>

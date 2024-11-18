@@ -1,28 +1,27 @@
 import axios from "axios";
-import { ChangeEvent, FormEvent, useContext } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import Context from "../context/Context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
 
     const { email, setEmail, onLogin, cpf, setCPF, name, setName } = useContext(Context);
+    const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
-    let password = '';
-
     const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) : void => {
         if(target.name === 'email') {
-            setEmail(target.value)
+            setEmail(target.value);
         } 
         if(target.name === 'password') {
-            password = target.value;
+            setPassword(target.value);
         }
         if(target.name === 'cpf') {
-            setCPF(target.value)
+            setCPF(target.value);
         }
         if(target.name === 'name') {
-            setName(target.value)
+            setName(target.value);
         }
     }
 
@@ -37,11 +36,10 @@ function Register() {
             });
             const token = response.data.token.token;
             const id = response.data.user.id;
-            console.log('passou do register');
             
             onLogin(email, token, id);
 
-            const customerResponse = await axios.post(`${address}/customers`, {
+            await axios.post(`${address}/customers`, {
                 name,
                 userId: id,
                 cpf
@@ -51,9 +49,8 @@ function Register() {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log('passou do customer');
             
-            console.log(customerResponse.data);
+            setPassword('')
             navigate('/products');
         } catch (err) {
             console.error('Error registering:', err)
@@ -71,6 +68,8 @@ function Register() {
             <input type="password" onChange={ handleChange } name="password" id="password" placeholder="Enter your password"/>
             <button>Register</button>
         </form>
+        <p>Already registered? <Link to="/">Sign in</Link></p>
+        
     </>
     )
 }

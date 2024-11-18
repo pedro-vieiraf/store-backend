@@ -76,7 +76,7 @@ function ProductsPage() {
             <h1>Products Page</h1>
             <div>
                 {products.map((product: Product) => (                  
-                    <div key={product.id}>
+                    <div key={product.id} style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>Price: ${product.price}</p>

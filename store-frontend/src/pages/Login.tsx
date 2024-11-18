@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useContext } from "react"
+import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import Context from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,16 +7,15 @@ import { Link } from 'react-router-dom';
 function Login() {
 
     const { onLogin, email, setEmail } = useContext(Context);
+    const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
-
-    let password = '';
 
     const handleChange = ({ target } : ChangeEvent<HTMLInputElement>) : void => {
         if(target.name === 'email') {
             setEmail(target.value)
         } else{
-            password = target.value;
+            setPassword(target.value);
         }
     }
 
@@ -34,6 +33,7 @@ function Login() {
             const token = response.data.token.token;
             const id = response.data.user.id;
             onLogin(email, token, id);
+            setPassword('');
             navigate('/products');
         } catch (err) {
             console.error('Error logging in:', err)

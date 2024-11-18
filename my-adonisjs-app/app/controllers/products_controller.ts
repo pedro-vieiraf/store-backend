@@ -9,7 +9,7 @@ export default class ProductsController {
       const products = await Product.query()
         .select('id', 'name', 'price', 'stock')
         .whereNull('deletedAt')
-        .orderBy('name', 'asc')
+        .orderBy('created_at', 'asc')
 
       return response.status(200).json(products)
     } catch (err) {
