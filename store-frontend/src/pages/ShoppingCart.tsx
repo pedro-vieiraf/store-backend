@@ -16,7 +16,7 @@ function ShoppingCart() {
                 groupedItems[item.id] = { ...item, quantity: 1 };
             }
         });
-    
+
         return Object.values(groupedItems);
     }
     const handleCheckout = async () => {
@@ -28,13 +28,8 @@ function ShoppingCart() {
                 customerId: id,
                 productId: product.id,
                 quantity: product.quantity
-            }))
-            console.log('updatedCart', updatedCart);
-            console.log('salesData', salesData);
-            console.log('cart', cart.length);
-            
-            
-            
+            }))  
+   
             await Promise.all(
                 salesData.map((sale) =>
                     axios.post(`${address}/sales`, sale, {
@@ -46,10 +41,15 @@ function ShoppingCart() {
                 )
             );
             setCart([])
-
         } catch (err) {
             console.error('Error checking out:', err)
         }
+    }
+    
+    const handleRemove = (index: number) => {
+        const newCart = [...cart];
+        newCart.splice(index, 1);
+        setCart(newCart);
     }
 
     const totalPrice = cart.reduce((acc: number, product: Product) => acc += product.price, 0);
@@ -67,6 +67,7 @@ function ShoppingCart() {
                                 <h2>{product.name}</h2>
                                 <p>{product.description}</p>
                                 <p>Price: ${product.price}</p>
+                                <button onClick={() => handleRemove(index)}>Remove</button>
                             </li>
                         ))}
                         </ul>

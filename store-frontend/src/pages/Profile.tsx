@@ -32,17 +32,24 @@ function Profile() {
 
     const navigate = useNavigate();
 
-    const handleDeleteProduct = async (id: number) => {
+    const handleDeleteProduct = async (productId: number) => {
         try {
             const address = import.meta.env.VITE_BACKEND_URL;
-            await axios.delete(`${address}/products/${id}`, {
+            await axios.delete(`${address}/products/${productId}`, {
                 headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                }
-            })
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            setProfile((prevProfile) => {
+                if (!prevProfile) return null;
+                return {
+                    ...prevProfile,
+                    products: prevProfile.products.filter((product) => product.id !== productId),
+                };
+            });
         } catch (err) {
-            console.error('Error deleting product:', err)
+            console.error('Error deleting product:', err);
         }
     };
 
@@ -100,23 +107,26 @@ function Profile() {
                 ) : (
                     <p>You haven't made any purchases yet.</p>
                 )}
+            </section>
+            <section>
                 <h2>Products</h2>
+                {profile.products.length === 0 && (
+                    <>
+                        <p>You haven't published any product yet.</p>
+                    </>
+                )}
                 <button onClick={() => navigate('/newProduct')}>Create a new product</button>
-                {profile.products.length > 0 ? (
+            
+                {profile.products.length > 0 && (
                     profile.products.map((product) => (
                         <div key={product.id} style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
                             <h3>{product.name}</h3>
                             <p><strong>Description:</strong> {product.description}</p>
                             <p><strong>Price:</strong> ${product.price}</p>
                             <button onClick={() => navigate(`/editProduct/${product.id}`)}>Edit</button>
-                            <button onClick={ () => handleDeleteProduct(product.id) }>Delete</button>
+                            <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
                         </div>
                     ))
-                ) : (
-                    <>
-                        <p>You haven't published any product yet.</p>        
-                        <button onClick={() => navigate('/newProduct')}>Create a new product</button>
-                    </>
                 )}
             </section>
         </div>

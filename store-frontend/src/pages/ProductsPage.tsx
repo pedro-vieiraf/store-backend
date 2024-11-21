@@ -21,9 +21,8 @@ function ProductsPage() {
             const updatedProducts = [...products];
             updatedProducts[productIndex] = updatedProduct;
             setProducts(updatedProducts);
-            
             setCart([...cart, updatedProduct]);
-    
+            
         } catch (err) {
             console.log('Erro ao adicionar produto ao carrinho:', err);
             console.error(err);
@@ -44,7 +43,7 @@ function ProductsPage() {
                 });
         
                 const data = response.data;
-
+                
                 const cartCountMap: { [id: number]: number } = {};
                 cart.forEach((item) => {
                     cartCountMap[item.id] = (cartCountMap[item.id] || 0) + 1;
@@ -54,9 +53,8 @@ function ProductsPage() {
                     const cartQuantity = cartCountMap[product.id] || 0;
                     return { ...product, stock: product.stock - cartQuantity };
                 });
-    
                 setProducts(updatedData);
-
+                
             } catch (err) {
                 console.log('Error fetching data:', err);
                 console.error(err)

@@ -27,8 +27,7 @@ function NewProduct() {
         setIsSubmitting(true);
 
         if (!formData.name || !formData.description || formData.price <= 0 || formData.stock < 0) {
-            alert("Please fill in all fields correctly.");
-            return;
+            setIsSubmitting(false);
         }
         
         const address = import.meta.env.VITE_BACKEND_URL;
@@ -48,10 +47,15 @@ function NewProduct() {
             })
             setIsSubmitting(false);
             navigate("/profile");
-
-            
         } catch (err) {
-            console.error('Error adding product:', err)
+            if (axios.isAxiosError(err)) {
+                if (err.response?.status === 401) {
+                    alert('Unauthorized');
+                    navigate("/")
+                }
+            }
+        } finally {
+            setIsSubmitting(false);
         }
     }
     // adicionar imagem no banco de dados.
