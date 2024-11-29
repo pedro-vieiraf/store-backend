@@ -83,7 +83,7 @@ function Register() {
                     </div>
                     <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400">Register</button>
                 </form>
-                <p className="text-sm font-light">Already registered? <Link to="/">Sign in</Link></p>    
+                <p className="text-sm font-light">Already registered? <Link to="/" className="text-saffron-200 hover:text-saffron-500">Sign in</Link></p>    
             </div>
         </div>
     )

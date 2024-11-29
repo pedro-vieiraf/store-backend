@@ -58,7 +58,7 @@ function Login() {
                         <input type="password" onChange={ handleChange } name="password" id="password" placeholder="••••••••" className="border rounded-lg block w-full p-2.5"/>
                     </div>
                     <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400">Sign In</button>
-                    <p className="text-sm font-light">Don't have an account yet? <Link to="/register">Sign up</Link></p>
+                    <p className="text-sm font-light">Don't have an account yet? <Link to="/register" className="text-saffron-200 hover:text-saffron-500">Sign up</Link></p>
                 </form>
             </div>
         </div>
