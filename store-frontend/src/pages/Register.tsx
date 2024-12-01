@@ -59,31 +59,33 @@ function Register() {
     }
 
     return (
-        <div className="w-full rounded-lg md:mt-0 sm:max-w-md xl:p-0 bg-eeire-black-200">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8 text-left">
-                <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl">
-                    Create account
-                </h1>
-                <form className="space-y-4 md:space-y-6" onSubmit={ handleSubmit }>
-                    <div>
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium">Your name</label>
-                        <input type="name" onChange={ handleChange } name="name" id="name" placeholder="Enter your name" className="border rounded-lg block w-full p-2.5"/>
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
-                        <input type="email" onChange={ handleChange } name="email" id="email" placeholder="Enter your email address" className="border rounded-lg block w-full p-2.5"/>
-                    </div>
-                    <div>
-                        <label htmlFor="cpf" className="block mb-2 text-sm font-medium">Your CPF</label>
-                        <input type="cpf" onChange={ handleChange } name="cpf" id="cpf" placeholder="Enter your CPF" className="border rounded-lg block w-full p-2.5"/>
-                    </div>
-                    <div>
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium">Your password</label>
-                        <input type="password" onChange={ handleChange } name="password" id="password" placeholder="Enter your password" className="border rounded-lg block w-full p-2.5"/>
-                    </div>
-                    <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400">Register</button>
-                </form>
-                <p className="text-sm font-light">Already registered? <Link to="/" className="text-saffron-200 hover:text-saffron-500">Sign in</Link></p>    
+        <div className="w-full h-full flex items-center justify-center bg-gray-900">
+            <div className="rounded-lg mt-0 max-w-md bg-eeire-black-200">
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8 text-left">
+                    <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl">
+                        Create account
+                    </h1>
+                    <form className="space-y-6" onSubmit={ handleSubmit }>
+                        <div>
+                            <label htmlFor="name" className="block mb-2 text-sm font-medium">Your name</label>
+                            <input type="name" onChange={ handleChange } name="name" id="name" placeholder="Enter your name" className="border rounded-lg block w-full p-2.5"/>
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
+                            <input type="email" onChange={ handleChange } name="email" id="email" placeholder="Enter your email address" className="border rounded-lg block w-full p-2.5"/>
+                        </div>
+                        <div>
+                            <label htmlFor="cpf" className="block mb-2 text-sm font-medium">Your CPF</label>
+                            <input type="cpf" onChange={ handleChange } name="cpf" id="cpf" placeholder="Enter your CPF" className="border rounded-lg block w-full p-2.5"/>
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block mb-2 text-sm font-medium">Your password</label>
+                            <input type="password" onChange={ handleChange } name="password" id="password" placeholder="Enter your password" className="border rounded-lg block w-full p-2.5"/>
+                        </div>
+                        <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 px-5 font-medium">Register</button>
+                    </form>
+                    <p className="text-sm font-light">Already registered? <Link to="/" className="text-saffron-200 hover:text-saffron-500 font-medium">Sign in</Link></p>    
+                </div>
             </div>
         </div>
     )

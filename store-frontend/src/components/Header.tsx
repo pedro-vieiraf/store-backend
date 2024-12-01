@@ -9,7 +9,7 @@ function Header() {
                         <li>
                             <Link
                                 to="/products"
-                                className="text-saffron-200 hover:text-saffron-500 transition duration-300"
+                                className="text-saffron-200 hover:text-white hover:bg-saffron-500 px-3 py-1 rounded transition duration-300"
                             >
                                 Store
                             </Link>
@@ -17,7 +17,7 @@ function Header() {
                         <li>
                             <Link
                                 to="/cart"
-                                className="text-saffron-200 hover:text-saffron-500 transition duration-300"
+                                className="text-saffron-200 hover:text-white hover:bg-saffron-500 px-3 py-1 rounded transition duration-300"
                             >
                                 Shopping Cart
                             </Link>
@@ -25,7 +25,7 @@ function Header() {
                         <li>
                             <Link
                                 to="/profile"
-                                className="text-saffron-200 hover:text-saffron-500 transition duration-300"
+                                className="text-saffron-200 hover:text-white hover:bg-saffron-500 px-3 py-1 rounded transition duration-300"
                             >
                                 Profile
                             </Link>
