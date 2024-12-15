@@ -136,7 +136,7 @@ function Profile() {
                       <div className="space-x-4 mt-4">
                         <button
                           onClick={() => navigate(`/editProduct/${product.id}`)}
-                          className="text-white bg-saffron-500 hover:bg-saffron-600 rounded-lg py-2 px-4 font-medium transition duration-300"
+                          className="text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 px-4 font-medium transition duration-300"
                         >
                           Edit
                         </button>
@@ -154,7 +154,7 @@ function Profile() {
               <div className="mt-6">
                 <button
                   onClick={() => navigate('/newProduct')}
-                  className="w-full md:w-1/3 text-white bg-saffron-500 hover:bg-saffron-600 rounded-lg py-3 font-medium transition duration-300"
+                  className="w-full md:w-1/3 text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-3 font-medium transition duration-300"
                 >
                   Create a new product
                 </button>
