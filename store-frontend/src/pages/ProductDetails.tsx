@@ -58,16 +58,40 @@ function ProductDetails() {
     }
 
     return (
-        <>
-        <div style={{ border: "1px solid #ddd", margin: "10px", padding: "10px" }}>
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <p>Stock: {product.stock}</p>
-            <button onClick={ handleCart }>Add to cart</button>
-        </div>
-        </>
-    );
+        <main className="min-h-screen bg-white text-gray-900 flex items-center justify-center p-8">
+          {/* Card do produto */}
+          <div className="bg-white border border-gray-300 rounded-lg shadow-lg shadow-gray-300 p-6 max-w-lg w-full">
+            {/* Nome do produto */}
+            <h1 className="text-3xl font-extrabold text-saffron-600 mb-4 text-center">
+              {product.name}
+            </h1>
+      
+            {/* Descrição */}
+            <p className="text-gray-600 text-lg mb-6 text-center">
+              {product.description}
+            </p>
+      
+            {/* Preço e estoque */}
+            <div className="space-y-2 text-center">
+              <p className="text-xl font-medium">
+                Price: <span className="text-saffron-200">${product.price}</span>
+              </p>
+              <p className="text-xl font-medium">
+                Stock: <span className="text-saffron-200">{product.stock}</span>
+              </p>
+            </div>
+      
+            {/* Botão "Add to cart" */}
+            <button
+              onClick={handleCart}
+              className="mt-6 w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-3 font-medium transition duration-300"
+            >
+              Add to cart
+            </button>
+          </div>
+        </main>
+      );
+      
 }
 
 export default ProductDetails;
