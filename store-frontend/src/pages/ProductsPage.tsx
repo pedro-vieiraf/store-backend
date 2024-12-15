@@ -70,38 +70,39 @@ function ProductsPage() {
     }
 
     return (
-        <main className="m-14 text-gray-300 min-h-screen">
-            <div className="max-w-7xl mx-auto">
-                <h1 className="text-3xl font-extrabold leading-tight tracking-wide text-center pb-8 pt-5">Products Page</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {products.map((product: Product) => (                  
-                        <div key={product.id} className="bg-gray-800 border border-gray-700 p-6 rounded-lg shadow-lg shadow-gray-900 flex flex-col justify-between transition transform hover:scale-105 hover:shadow-gray-600 duration-300">
-                            <h2 className="text-xl font-semibold mb-2 text-saffron-200">{product.name}</h2>
-                            <p className="text-gray-400 text-sm mb-4">{product.description}</p>
-                            <div className="text-sm space-y-1">
-                                <p className="font-medium">Price: <span className="text-saffron-300">${product.price}</span></p>
-                                <p className="font-medium">Stock: <span className="text-saffron-300">{product.stock}</span></p>
-                            </div>
-                            <div className="mt-4 space-y-2">
-                                <Link
-                                    to={`/products/${product.id}`}
-                                    className="text-saffron-300 hover:text-saffron-500 text-sm underline"
-                                >
-                                    View Details
-                                </Link>
-                                <button
-                                    onClick={() => handleCart(product.id)}
-                                    className="w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 font-medium transition duration-300"
-                                >
-                                    Add to cart
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+        <main className="m-14 text-gray-900 min-h-screen bg-white">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-wide text-center pb-8 pt-5 text-gray-800">Products Page</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {products.map((product: Product) => (                  
+                <div key={product.id} className="border border-gray-300 p-6 rounded-lg shadow-lg flex flex-col justify-between transition transform hover:scale-105 bg-white">
+                  <h2 className="text-xl font-semibold mb-2 text-gray-800">{product.name}</h2>
+                  <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+                  <div className="text-sm space-y-1">
+                    <p className="font-medium text-gray-800">Price: <span className="text-saffron-200">${product.price}</span></p>
+                    <p className="font-medium text-gray-800">Stock: <span className="text-saffron-200">{product.stock}</span></p>
+                  </div>
+                  <div className="mt-4 space-y-2">
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="text-saffron-200 hover:text-saffron-400 text-sm underline"
+                    >
+                      View Details
+                    </Link>
+                    <button
+                      onClick={() => handleCart(product.id)}
+                      className="w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 font-medium transition duration-300"
+                    >
+                      Add to cart
+                    </button>
+                  </div>
                 </div>
+              ))}
             </div>
+          </div>
         </main>
-    )
+      );
+      
 }
 
 export default ProductsPage
