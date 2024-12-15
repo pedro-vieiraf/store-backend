@@ -57,7 +57,7 @@ function ShoppingCart() {
     return (
         <main className="pt-20 min-h-screen bg-white text-gray-900 p-8">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-4xl font-extrabold text-center text-saffron-600 mb-8">Shopping Cart</h1>
+            <h1 className="text-3xl font-extrabold text-center text-saffron-600 mb-8">Shopping Cart</h1>
       
             {cart.length === 0 ? (
               <p className="text-center text-gray-600 text-lg">Your cart is empty.</p>
