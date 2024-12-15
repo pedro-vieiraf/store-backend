@@ -70,7 +70,7 @@ function ProductsPage() {
     }
 
     return (
-        <main className="m-14 text-gray-900 min-h-screen bg-white">
+        <main className="pt-14 text-gray-900 min-h-screen bg-white">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-extrabold leading-tight tracking-wide text-center pb-8 pt-5 text-gray-800">Products Page</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

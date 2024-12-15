@@ -55,7 +55,7 @@ function ShoppingCart() {
     const totalPrice = cart.reduce((acc: number, product: Product) => acc += product.price, 0);
 
     return (
-        <main className="m-14 min-h-screen bg-white text-gray-900 p-8">
+        <main className="pt-20 min-h-screen bg-white text-gray-900 p-8">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl font-extrabold text-center text-saffron-600 mb-8">Shopping Cart</h1>
       
