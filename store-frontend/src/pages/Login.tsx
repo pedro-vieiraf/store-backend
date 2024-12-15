@@ -43,23 +43,44 @@ function Login() {
     // colocar uma mensagem de login inválido caso esteja errado
 
     return (
-        <div className="w-full h-full flex items-center justify-center bg-gray-900">
-            <div className="rounded-lg mt-0 max-w-md bg-eeire-black-200">
+        <div className="w-full h-full flex items-center justify-center">
+            <div className="rounded-lg mt-0 max-w-md bg-white border border-gray-300">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8 text-left"> 
                     <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl">
                         Sign in to your account
                     </h1>
-                    <form className="space-y-6" onSubmit={ handleSubmit }>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
-                            <input type="email" onChange={ handleChange } name="email" id="email" placeholder="Enter your email address" className="border rounded-lg block w-full p-2.5"/>
+                            <input
+                                type="email"
+                                onChange={handleChange}
+                                name="email"
+                                id="email"
+                                placeholder="Enter your email address"
+                                className="border rounded-lg block w-full p-2.5 focus:outline-none focus:border-saffron-300 focus:ring-2 focus:ring-saffron-100"
+                            />
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
-                            <input type="password" onChange={ handleChange } name="password" id="password" placeholder="••••••••" className="border rounded-lg block w-full p-2.5"/>
+                            <input
+                                type="password"
+                                onChange={handleChange}
+                                name="password"
+                                id="password"
+                                placeholder="••••••••"
+                                className="border rounded-lg block w-full p-2.5 focus:outline-none focus:border-saffron-300 focus:ring-2 focus:ring-saffron-100"
+                            />
                         </div>
-                        <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 px-5 font-medium">Sign In</button>
-                        <p className="text-sm font-light">Don't have an account yet? <Link to="/register" className="text-saffron-200 hover:text-saffron-500 font-medium">Sign up</Link></p>
+                        <button className="w-full text-white bg-saffron-200 hover:bg-saffron-400 rounded-lg py-2 px-5 font-medium">
+                            Sign In
+                        </button>
+                        <p className="text-sm font-light">
+                            Don't have an account yet?{" "}
+                            <Link to="/register" className="text-saffron-200 hover:text-saffron-500 font-medium">
+                                Sign up
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>

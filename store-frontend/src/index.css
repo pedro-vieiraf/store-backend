@@ -10,9 +10,9 @@ html, body, #root {
 }
 
 :root {
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #161616;
+  color-scheme: light;
+  color: rgba(0, 0, 0, 0.87); /* Cor de texto escura para modo claro */
+  background-color: #f9f9f9; /* Cor de fundo clara para o modo claro */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,9 +25,19 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f9f9f9; /* Fundo mais claro */
+  color: rgba(0, 0, 0, 0.87); /* Cor de texto escura */
 }
 
 button {
   border: 1px solid transparent;
   font-family: inherit;
+}
+
+a {
+  color: #1D4ED8; /* Cor padrão dos links */
+}
+
+a:hover {
+  color: #2563EB; /* Cor de hover para links */
 }

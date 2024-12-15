@@ -5,14 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      'white': '#ffffff',
-      'saffron': {'100':'#F0C142', '200':'#EEBB2F', '300':'#EDB51D', '400':'#E2AB12', '500':'#D09D11'},
-      'goldenrod': '#D09D11',
-      'night': '#161616',
-      'eeire-black': {'100':'#262626', '200':'#212121'},
+    extend:{
+      colors: {
+        'white': '#ffffff',
+        'saffron': {'100':'#F0C142', '200':'#EEBB2F', '300':'#EDB51D', '400':'#E2AB12', '500':'#D09D11'},
+        'goldenrod': '#D09D11',
+        'night': '#161616',
+        'eeire-black': {'100':'#262626', '200':'#212121'},
+      },
     },
-    extend: {}, 
   },
   plugins: [],
 }

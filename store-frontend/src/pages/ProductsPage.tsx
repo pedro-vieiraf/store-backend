@@ -80,7 +80,7 @@ function ProductsPage() {
                             <p className="text-gray-400 text-sm mb-4">{product.description}</p>
                             <div className="text-sm space-y-1">
                                 <p className="font-medium">Price: <span className="text-saffron-300">${product.price}</span></p>
-                                <p className="font-medium">Stock: <span className="text-saffron-300">${product.price}</span></p>
+                                <p className="font-medium">Stock: <span className="text-saffron-300">{product.stock}</span></p>
                             </div>
                             <div className="mt-4 space-y-2">
                                 <Link
