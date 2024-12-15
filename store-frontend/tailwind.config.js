@@ -7,6 +7,7 @@ export default {
   theme: {
     extend:{
       colors: {
+        'amazon_blue': '#232f3e',
         'white': '#ffffff',
         'saffron': {'100':'#F0C142', '200':'#EEBB2F', '300':'#EDB51D', '400':'#E2AB12', '500':'#D09D11'},
         'goldenrod': '#D09D11',
